@@ -16,7 +16,8 @@
      ;; Example of useful layers you may want to use right away
      ;; Uncomment a layer name and press C-c C-c to install it
      ;; --------------------------------------------------------
-        auto-completion
+        (auto-completion :variables
+             auto-completion-complete-with-key-sequence (kbd "jk"))
         better-defaults
         (git :variables
              git-gutter-use-fringe t)
@@ -27,7 +28,9 @@
         c-c++
         ycmd
         (python :variables python-test-runner 'pytest)
-        shell
+        (shell :variables shell-default-shell 'eshell)
+        perspectives
+        emacs-lisp
      )
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
@@ -144,8 +147,30 @@ before layers configuration."
   "Configuration function.
  This function is called at the very end of Spacemacs initialization after
 layers configuration."
-  (add-hook 'prog-mode #'linum-mode)
+  (add-hook 'prog-mode-hook #'linum-mode)
+  (add-hook 'prog-mode-hook #'linum-relative-toggle)
+  (progn
+    ;; Tab settings
+    (setq-default tab-width 4)
+    (setq-default c-basic-offset 4)
+    (setq-default indent-tabs-mode nil)
+
+    ;; Whitespace settings
+    (setq whitespace-action '(auto-cleanup))
+    (setq whitespace-style '(trailing space-before-tab indentation empty space-after-tab))
+
+    ;; Misc settings
+    ;; (setq ac-use-menu-map t)
+    ;; (define-key ac-menu-map "\C-n" 'ac-next)
+    ;; (define-key ac-menu-map "\C-p" 'ac-previous)
+  )
   (global-company-mode)
+  ;; (add-hook 'evil-after-load-hook
+            ;; (lambda ()
+              ;; (progn
+                ;; (define-key evil-normal-state-map (kbd "\C-n") 'helm-projectile-find-file)
+                ;; (define-key evil-normal-state-map (kbd "\C-p") 'helm-projectile-switch-to-buffer)
+                ;; (define-key evil-normal-state-map ";" 'evil-ex))))
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
