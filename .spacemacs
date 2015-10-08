@@ -19,17 +19,18 @@
         (auto-completion :variables
              auto-completion-complete-with-key-sequence (kbd "jk"))
         better-defaults
+        version-control
         (git :variables
              git-gutter-use-fringe t)
      ;; markdown
-     ;; org
+        org
         syntax-checking
         themes-megapack
         c-c++
         ycmd
         (python :variables python-test-runner 'pytest)
         (shell :variables shell-default-shell 'eshell)
-        perspectives
+        eyebrowse
         emacs-lisp
      )
    ;; A list of packages and/or extensions that will not be install and loaded.
@@ -113,7 +114,7 @@ before layers configuration."
    ;; If non nil the frame is maximized when Emacs starts up.
    ;; Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil.
    ;; (Emacs 24.4+ only)
-   dotspacemacs-maximized-at-startup nil
+   dotspacemacs-maximized-at-startup t
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's active or selected.
    ;; Transparency can be toggled through `toggle-transparency'.
@@ -141,6 +142,11 @@ before layers configuration."
    dotspacemacs-default-package-repository nil
    )
   ;; User initialization goes here
+
+  ;; Toggle maximized state by default
+  ;; (custom-set-variables
+  ;;  '(initial-frame-alist (quote ((fullscreen . maximized)))))
+
   )
 
 (defun dotspacemacs/config ()
@@ -156,8 +162,8 @@ layers configuration."
     (setq-default indent-tabs-mode nil)
 
     ;; Whitespace settings
-    (setq whitespace-action '(auto-cleanup))
-    (setq whitespace-style '(trailing space-before-tab indentation empty space-after-tab))
+    ;; (setq whitespace-action '(auto-cleanup))
+    ;; (setq whitespace-style '(trailing space-before-tab indentation empty space-after-tab))
 
     ;; Misc settings
     ;; (setq ac-use-menu-map t)
